@@ -1,7 +1,7 @@
 package iostream;
-
+import java.nio.file.Paths;
 import java.io.FileInputStream;
-
+import java.nio.file.Path;
 public class File_Input_Stream {
 
 	public static void main(String[] args) {
