@@ -1,72 +1,82 @@
 package abstra;
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-interface SearchByGen{
-	public abstract void searchGen(String gen);
-}
-interface SearchByTitle{
-	public abstract void searchTitle(String title);
-}
-class Catalogue implements SearchByGen,SearchByTitle{
-	private static Date lastUpdate;
-	private static List<Moviee>MovieList=new ArrayList<Moviee>();
-	public void searchTitle(String Title) {
-		for(Moviee movie:MovieList) {
-			if(movie.getTitle().equals(Title)) {
-				movie.getMovieDetail();
-			}
-		}
-	}
-	
-	private void getMovieDetail() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private Object getTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void searchGen(String gen) {
-		for(Moviee movie:MovieList) {
-			if(movie.getGen().equalsIgnoreCase(gen)) {
-				movie.getMovieDetail();
-			}
-		}
-	}
-	
-private String getGen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+interface SearchbyGen {
+    void searchGen(String gen);
 }
 
-public class Moviee {
-	
+interface SearchbyTitle {
+    void searchTitle(String title);
 }
-		private String name;
-		private String des;	
-		private int rating;
-		private String language;
-		private date date;
-		private String country;
-		private String type;
-		
-		public void Movie(String name, String des, int rating, String language, Date date, String country, String type) {
-			this.name=name;
-			this.des=des;
-			this.rating=rating;
-			this.language=language;
-			this.date=date;
-			this.country=country;
-			this.type=type;
-			
 
-	}
+class Catalogue implements SearchByGen, SearchByTitle {
 
+    private static Date lastUpdate;
+    private static List<Moviee> movieList = new ArrayList<>();
+
+    public void searchTitle(String title) {
+
+        for (Moviee movie : movieList) {
+            if (movie.getTitle().equalsIgnoreCase(title)) {
+                movie.getMovieDetail();
+            }
+        }
+    }
+
+    public void searchGen(String gen) {
+
+        for (Moviee movie : movieList) {
+            if (movie.getGen().equalsIgnoreCase(gen)) {
+                movie.getMovieDetail();
+            }
+        }
+    }
+
+    public void addMovie(Moviee movie) {
+        movieList.add(movie);
+        lastUpdate = new Date();
+    }
+}
+
+class Moviee {
+
+    private String title;
+    private String description;
+    private int rating;
+    private String language;
+    private Date date;
+    private String country;
+    private String gen;
+
+    public Moviee(String title, String description, int rating,
+                  String language, Date date, String country, String gen) {
+
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.language = language;
+        this.date = date;
+        this.country = country;
+        this.gen = gen;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getGen() {
+        return gen;
+    }
+
+    public void getMovieDetail() {
+        System.out.println("Title: " + title);
+        System.out.println("Description: " + description);
+        System.out.println("Rating: " + rating);
+        System.out.println("Language: " + language);
+        System.out.println("Release Date: " + date);
+        System.out.println("Country: " + country);
+        System.out.println("Genre: " + gen);
+        System.out.println("----------------------");
+    }
 }
