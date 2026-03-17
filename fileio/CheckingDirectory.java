@@ -15,6 +15,7 @@ public class CheckingDirectory {
 		System.out.println("Not exist "+Files.notExists(p));
 		 System.out.println("writable "+Files.isWritable(p));
 		 System.out.println("Excutable "+Files.isExecutable(p));
+		 System.out.println();
 	}
 
 }
