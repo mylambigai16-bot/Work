@@ -6,34 +6,39 @@ Sample Input and Output
 The sum of odd numbers from 1 to 1000 is: 250000
 The sum of even numbers from 1 to 1000 is: 250500
 The absolute difference between the two sums is: 500*/
-package functionMedium;
+//functionMedium;
+package HandsOn_2_Function;
+
 import java.util.*;
+
 public class AbsDiff {
-	static int odd_sum(int x,int y) {
-		int odd_sum=0;
-		for(int i=x;i<=y;i++) {
-			if(i%2!=0)
-				odd_sum+=i;       //odd number sum
+	static int odd_sum(int x, int y) {
+		int odd_sum = 0;
+		for (int i = x; i <= y; i++) {
+			if (i % 2 != 0)
+				odd_sum += i; // odd number sum
 		}
 		return odd_sum;
 	}
-	static int even_sum(int x,int y) {
-		int even_sum=0;
-		for(int i=x;i<=y;i++) {
-			if(i%2==0)
-				even_sum+=i;     //even number sum
+
+	static int even_sum(int x, int y) {
+		int even_sum = 0;
+		for (int i = x; i <= y; i++) {
+			if (i % 2 == 0)
+				even_sum += i; // even number sum
 		}
 		return even_sum;
-		
+
 	}
+
 	public static void main(String[] args) {
 		Scanner m = new Scanner(System.in);
 		System.out.println("Enter Range:");
-		int x=m.nextInt();
-		int y=m.nextInt();
-		int a=odd_sum(x,y);
-		int b=even_sum(x,y);
-		System.out.println("Difference: "+Math.abs(a-b)); //for absolute difference - math.abs
+		int x = m.nextInt();
+		int y = m.nextInt();
+		int a = odd_sum(x, y);
+		int b = even_sum(x, y);
+		System.out.println("Difference: " + Math.abs(a - b)); // for absolute difference - math.abs
 		m.close();
 	}
 
