@@ -66,7 +66,7 @@ class Rectangular extends Shape {
 public class Display {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		Shape s;
 
 		s = new Rectangular(3, 5);

@@ -1,7 +1,7 @@
 package abstra;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.*;
 
 interface SearchByGen {
@@ -81,7 +81,7 @@ class Catalog implements SearchByGen, SearchByTitle {
         Catalog c = new Catalog();
 
         Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+       // DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = cal.getTime();
 
         Movie m1 = new Movie("AAA", "Drama", 3, "English", date, "France", "Action");
