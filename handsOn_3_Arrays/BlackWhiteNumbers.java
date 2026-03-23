@@ -7,7 +7,7 @@ public class BlackWhiteNumbers {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int[] arr = new int[100];
+        int[] arr = new int[10];
         int size = 0;
 
         while (true) {

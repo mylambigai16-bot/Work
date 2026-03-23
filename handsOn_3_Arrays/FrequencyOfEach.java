@@ -17,7 +17,7 @@ public class FrequencyOfEach {
 		for (int i = 0; i < 10; i++) {
 			if (visited[i])
 				continue;
-			int count = 1;
+			int count = 0;
 			for (int j = 0; j < 10; j++) {
 				if (arr[i] == arr[j]) {
 					count++;
