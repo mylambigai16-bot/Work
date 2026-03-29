@@ -1,0 +1,120 @@
+CREATE SCHEMA hr;
+USE hr;
+CREATE TABLE regions (
+    region_id INT NOT NULL,
+    region_name VARCHAR(25),
+    PRIMARY KEY (region_id)
+);
+CREATE TABLE countries (
+    country_id CHAR(2) NOT NULL,
+    country_name VARCHAR(40),
+    region_id INT,
+    PRIMARY KEY (country_id),
+    FOREIGN KEY (region_id) REFERENCES regions(region_id)
+);
+CREATE TABLE locations (
+    location_id INT AUTO_INCREMENT,
+    street_address VARCHAR(40),
+    postal_code VARCHAR(12),
+    city VARCHAR(30) NOT NULL,
+    state_province VARCHAR(25),
+    country_id CHAR(2),
+    PRIMARY KEY (location_id),
+    FOREIGN KEY (country_id) REFERENCES countries(country_id)
+);
+CREATE TABLE departments (
+    department_id INT NOT NULL,
+    department_name VARCHAR(30) NOT NULL,
+    manager_id INT,
+    location_id INT,
+    PRIMARY KEY (department_id),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
+CREATE TABLE jobs (
+    job_id INT NOT NULL,
+    job_title VARCHAR(35) NOT NULL,
+    min_salary DECIMAL(10,2) UNSIGNED,
+    max_salary DECIMAL(10,2) UNSIGNED,
+    PRIMARY KEY (job_id)
+);
+CREATE TABLE employees (
+    employee_id INT NOT NULL,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    phone_number VARCHAR(20),
+    hire_date DATE NOT NULL,
+    job_id INT,
+    salary DECIMAL(10,2),
+    commission_pct DECIMAL(5,2),
+    manager_id INT,
+    department_id INT,
+    PRIMARY KEY (employee_id),
+
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    FOREIGN KEY (department_id) REFERENCES departments(department_id),
+    FOREIGN KEY (manager_id) REFERENCES employees(employee_id)
+);
+ALTER TABLE departments
+ADD CONSTRAINT fk_dept_manager
+FOREIGN KEY (manager_id) REFERENCES employees(employee_id);
+
+CREATE TABLE job_history (
+    employee_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    job_id INT,
+    department_id INT,
+
+    UNIQUE (employee_id, start_date),
+
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+INSERT INTO regions VALUES
+(1, 'Europe'),
+(2, 'Americas'),
+(3, 'Asia'),
+(4, 'Middle East & Africa');
+
+INSERT INTO countries VALUES
+('IT', 'Italy', 1),
+('FR', 'France', 1),
+('DE', 'Germany', 1),
+('RU', 'Russia', 1),
+('KR', 'South Korea', 3);
+INSERT INTO locations (street_address, postal_code, city, state_province, country_id) VALUES
+('Via Roma', '00100', 'Rome', 'Lazio', 'IT'),
+('5th Avenue', '10001', 'New York', 'NY', 'US'),
+('MG Road', '560001', 'Bangalore', 'Karnataka', 'IN'),
+('Shinjuku', '160-0022', 'Tokyo', NULL, 'JP'),
+('Sheikh Zayed Rd', '00000', 'Dubai', NULL, 'AE');
+
+INSERT INTO departments VALUES
+(10, 'Administration', NULL, 1),
+(20, 'Marketing', NULL, 2),
+(30, 'IT', NULL, 3),
+(40, 'Human Resources', NULL, 3),
+(50, 'Sales', NULL, 2),
+(60, 'Finance', NULL, 1);
+
+INSERT INTO jobs VALUES
+(1, 'President', 20000, 40000),
+(2, 'Manager', 10000, 20000),
+(3, 'Programmer', 4000, 10000),
+(4, 'Accountant', 5000, 12000),
+(5, 'Clerk', 2000, 5000);
+
+INSERT INTO employees VALUES
+(100, 'John', 'King', 'john@hr.com', '1234567890', '2000-01-01', 1, 30000, NULL, NULL, 10),
+(101, 'Neena', 'Kochhar', 'neena@hr.com', '1234567891', '2002-02-02', 2, 15000, NULL, 100, 20),
+(102, 'Lex', 'De Haan', 'lex@hr.com', '1234567892', '2003-03-03', 2, 14000, NULL, 100, 30),
+(103, 'Alexander', 'Hunold', 'alex@hr.com', '1234567893', '2004-04-04', 3, 9000, NULL, 102, 30),
+(104, 'Bruce', 'Ernst', 'bruce@hr.com', '1234567894', '2005-05-05', 3, 8000, NULL, 102, 30),
+(105, 'David', 'Austin', 'david@hr.com', '1234567895', '2006-06-06', 4, 7000, NULL, 101, 60);
+
+INSERT INTO job_history VALUES
+(103, '2002-01-01', '2004-01-01', 5, 20),
+(104, '2003-01-01', '2005-01-01', 5, 20),
+(105, '2004-01-01', '2006-01-01', 3, 30);
